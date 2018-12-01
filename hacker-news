@@ -1,0 +1,26 @@
+let url = 'https://newsapi.org/v2/top-headlines?' +
+          'country=us&' +
+          'apiKey=889ed31ece58431da59a4788a628cf40';
+
+fetch(url)
+  .then(
+    r => {
+      return r.json();
+    })
+  .then(
+    
+    data => {
+      let articles = data.articles;
+      let newsList = document.createElement("ul");
+      let body = document.querySelector("body");
+      body.appendChild(newsList);
+      articles.forEach(articles=>{
+        let newsItem = document.createElement("li"); 
+      newsItem.innerHTML =
+        '<a href="' + articles.url + '">' + articles.title + "</a>"; 
+      newsList.appendChild(newsItem);
+      });
+    })
+  .catch(e => {
+    console.log(`An error occurred: ${e}`);
+      });
